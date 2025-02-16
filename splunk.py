@@ -9,6 +9,7 @@ from xml.dom import minidom
 baseurl = os.environ.get("SPLUNK_BASE_URL")
 userName = os.environ.get("SPLUNK_USERNAME")
 password = os.environ.get("SPLUNK_PASSWORD")
+# token = os.environ.get("SPLUNK_TOKEN") # token authentication
 
 
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
@@ -19,6 +20,10 @@ new_description = '16.02.2025 18:16 tarixinde update olundu, GOOD JOB'
 
 # Authenticate with server.
 http = httplib2.Http(disable_ssl_certificate_validation=True)
+
+
+
+# if using token for authentication comment in this section 
 serverContent = http.request(
     baseurl + '/services/auth/login',
     'POST', headers={}, 
@@ -26,6 +31,10 @@ serverContent = http.request(
 )[1]
 
 sessionKey = minidom.parseString(serverContent).getElementsByTagName('sessionKey')[0].childNodes[0].nodeValue
+# if using token for authentication comment in this section end
+
+
+
 
 # Correct Correlation Search API Path
 encoded_search_name = urllib.parse.quote(correlation_search_name)
@@ -51,6 +60,7 @@ update_body = urllib.parse.urlencode({
 
 response, content = http.request(update_url, 'POST',
     headers={'Authorization': f'Splunk {sessionKey}', 'Content-Type': 'application/x-www-form-urlencoded'},
+    # headers={'Authorization': f'Bearer {token}', 'Content-Type': 'application/x-www-form-urlencoded'}, # token authentication 
     body=update_body
 )
 

@@ -9,7 +9,7 @@ test:
           command: ["--tls=false"]
     stage: test
     script:
-        - sleep 5
+        - sleep 10
         - echo "hello gitlab-ci"
     tags: 
         - docker-runner

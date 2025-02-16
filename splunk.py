@@ -14,7 +14,7 @@ password = os.environ.get("SPLUNK_PASSWORD")
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search
 new_search_query = 'index=windows | inputlookup excluldedHosts.csv | head 10'
-new_description = '16.02.2025 17:08 tarixinde update olundu, GOOD JOB!!!!!!!'
+new_description = '16.02.2025 17:11 tarixinde update olundu, GOOD JOB!!!!!!!!!!!!!'
 #cron_schedule ='*/1 * * * *'
 
 # Authenticate with server.

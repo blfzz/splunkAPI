@@ -1,3 +1,4 @@
+import os
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
@@ -5,9 +6,10 @@ import urllib.request, urllib.parse, urllib.error
 import httplib2
 from xml.dom import minidom
 
-baseurl = $SPLUNK_BASE_URL
-userName = $SPLUNK_USERNAME
-password = $SPLUNK_PASSWORD
+baseurl = os.environ.get("SPLUNK_BASE_URL")
+userName = os.environ.get("SPLUNK_USERNAME")
+password = os.environ.get("SPLUNK_PASSWORD")
+
 
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search

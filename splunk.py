@@ -7,15 +7,15 @@ import httplib2
 from xml.dom import minidom
 
 baseurl = os.environ.get("SPLUNK_BASE_URL")
-userName = os.environ.get("SPLUNK_USERNAME")
-password = os.environ.get("SPLUNK_PASSWORD")
-# token = os.environ.get("SPLUNK_TOKEN") # token authentication
+# userName = os.environ.get("SPLUNK_USERNAME")
+# password = os.environ.get("SPLUNK_PASSWORD")
+token = os.environ.get("SPLUNK_TOKEN") # token authentication
 
 
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search
 new_search_query = 'index=windows | inputlookup excluldedHosts.csv | head 10'
-new_description = '16.02.2025 18:16 tarixinde update olundu, GOOD JOB'
+new_description = 'Successfully Updated Correlation Search'
 #cron_schedule ='*/1 * * * *'
 
 # Authenticate with server.
@@ -24,13 +24,13 @@ http = httplib2.Http(disable_ssl_certificate_validation=True)
 
 
 # if using token for authentication comment in this section 
-serverContent = http.request(
-    baseurl + '/services/auth/login',
-    'POST', headers={}, 
-    body=urllib.parse.urlencode({'username': userName, 'password': password})
-)[1]
+# serverContent = http.request(
+#     baseurl + '/services/auth/login',
+#     'POST', headers={}, 
+#     body=urllib.parse.urlencode({'username': userName, 'password': password})
+# )[1]
 
-sessionKey = minidom.parseString(serverContent).getElementsByTagName('sessionKey')[0].childNodes[0].nodeValue
+# sessionKey = minidom.parseString(serverContent).getElementsByTagName('sessionKey')[0].childNodes[0].nodeValue
 # if using token for authentication comment in this section end
 
 
@@ -59,8 +59,8 @@ update_body = urllib.parse.urlencode({
 })
 
 response, content = http.request(update_url, 'POST',
-    headers={'Authorization': f'Splunk {sessionKey}', 'Content-Type': 'application/x-www-form-urlencoded'},
-    # headers={'Authorization': f'Bearer {token}', 'Content-Type': 'application/x-www-form-urlencoded'}, # token authentication 
+    # headers={'Authorization': f'Splunk {sessionKey}', 'Content-Type': 'application/x-www-form-urlencoded'},
+    headers={'Authorization': f'Bearer {token}', 'Content-Type': 'application/x-www-form-urlencoded'}, # token authentication 
     body=update_body
 )
 

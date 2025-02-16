@@ -5,13 +5,14 @@ import urllib.request, urllib.parse, urllib.error
 import httplib2
 from xml.dom import minidom
 
-baseurl = 'https://192.168.2.10:8089'
-userName = 'admin'
-password = 'P@ssword'
+baseurl = $SPLUNK_BASE_URL
+userName = $SPLUNK_USERNAME
+password = $SPLUNK_PASSWORD
+
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search
 new_search_query = 'index=linux | inputlookup excluldedHosts.csv | head 10'
-new_description = '16.02.2025 tarixinde update olundu'
+new_description = '16.02.2025 16:50 tarixinde update olundu, GOOD JOB!'
 #cron_schedule ='*/1 * * * *'
 
 # Authenticate with server.

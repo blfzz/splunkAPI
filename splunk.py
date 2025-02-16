@@ -10,8 +10,8 @@ userName = 'admin'
 password = 'P@ssword'
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search
-new_search_query = 'index=main | inputlookup updated_ioc_domains.csv | head 10'
-new_description = 'Salam Aleykum teze rule geldi isti istii'
+new_search_query = 'index=linux | inputlookup excluldedHosts.csv | head 10'
+new_description = '16.02.2025 tarixinde update olundu'
 #cron_schedule ='*/1 * * * *'
 
 # Authenticate with server.

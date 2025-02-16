@@ -2,16 +2,19 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 import urllib.request, urllib.parse, urllib.error
+import os
 import httplib2
 from xml.dom import minidom
 
-baseurl = 'https://192.168.2.10:8089'
-userName = 'admin'
-password = 'P@ssword'
+baseurl = os.environ.get("SPLUNK_BASE_URL")
+userName = os.environ.get("SPLUNK_USERNAME")
+password = os.environ.get("SPLUNK_PASSWORD")
+
+
 correlation_search_name = 'Threat - blfz_test - Rule' # Correlation Search
 # correlation_search_name = 'blfz_Excessive Failed Login Activity' # Saved Search
-new_search_query = 'index=main | inputlookup updated_ioc_domains.csv | head 10'
-new_description = 'Salam Aleykum teze rule geldi isti istii'
+new_search_query = 'index=windows | inputlookup excluldedHosts.csv | head 10'
+new_description = '16.02.2025 17:08 tarixinde update olundu, GOOD JOB!!!!!!!'
 #cron_schedule ='*/1 * * * *'
 
 # Authenticate with server.
